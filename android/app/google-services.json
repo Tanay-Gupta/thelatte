@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1086029140029",
+    "project_id": "thelatte-caeba",
+    "storage_bucket": "thelatte-caeba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086029140029:android:2397ff81724d2b16f15a54",
+        "android_client_info": {
+          "package_name": "com.tandroid.thelatte"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086029140029-i1sc4s89f17q73rmqab80lo8td8pqq1b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuu0mU-_Uk4ZJfu8mJJRdtAG-MnxraVk0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086029140029-i1sc4s89f17q73rmqab80lo8td8pqq1b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

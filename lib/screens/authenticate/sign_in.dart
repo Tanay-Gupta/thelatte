@@ -90,7 +90,11 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   height: 20,
                 ),
-                Text("$error errorbjkhkjh")
+                FloatingActionButton.extended(
+                    onPressed: () async {
+                      Navigator.pushNamed(context, '/resetPasword');
+                    },
+                    label: Text("Forget Password")),
               ],
             ),
           )),

@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User? Cuser = FirebaseAuth.instance.currentUser;
     final AuthServices _auth = AuthServices();
     final user = Provider.of<UserData?>(context);
 
@@ -32,11 +33,14 @@ class HomePage extends StatelessWidget {
                 Text(user.email.toString()),
                 FloatingActionButton.extended(
                     onPressed: () async {
-                      User? user = await FirebaseAuth.instance.currentUser;
-
-                      await user!.delete();
+                      await Cuser!.delete();
                     },
                     label: Text("Delete Account")),
+                FloatingActionButton.extended(
+                    onPressed: () async {
+                      await Cuser!.sendEmailVerification();
+                    },
+                    label: Text("Reset  Email Address")),
               ],
             ),
           )),

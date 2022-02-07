@@ -72,4 +72,15 @@ class AuthServices {
       return null;
     }
   }
+
+  //Reset password via email
+
+  Future ResetPasswordUsingEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
 }

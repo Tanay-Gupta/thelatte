@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thelatte/models/user.dart';
@@ -20,11 +21,25 @@ class HomePage extends StatelessWidget {
             icon: Icon(Icons.logout_rounded))
       ]),
       body: Material(
-          child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [Text("Email:"), Text(user.email.toString())],
-      )),
+          color: Colors.greenAccent,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text("Email:"),
+                Text(user.email.toString()),
+                FloatingActionButton.extended(
+                    onPressed: () async {
+                      User? user = await FirebaseAuth.instance.currentUser;
+
+                      await user!.delete();
+                    },
+                    label: Text("Delete Account")),
+              ],
+            ),
+          )),
     );
   }
 }

@@ -34,18 +34,39 @@ class _RegisterState extends State<Register> {
             key: _formkey,
             child: Column(
               children: [
-                TextFormField(validator: (value) {
-                  if (value!.isEmpty) {
-                    return ("Enter an email");
-                  } else {
-                    return null;
-                  }
-                }, onChanged: (value) {
-                  setState(() {
-                    email = value;
-                  });
-                }),
                 TextFormField(
+                    decoration: InputDecoration(
+                      fillColor: Colors.green,
+                      hintText: "enter email",
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return ("Enter an email");
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        email = value;
+                      });
+                    }),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                    fillColor: Colors.green,
+                    hintText: "enter password",
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(25.0),
+                      borderSide: new BorderSide(),
+                    ),
+                  ),
                   onChanged: (value) {
                     setState(() {
                       pass = value;
@@ -59,7 +80,7 @@ class _RegisterState extends State<Register> {
                     }
                   },
                 ),
-                TextButton(
+                ElevatedButton(
                     onPressed: () async {
                       if (_formkey.currentState!.validate()) {
                         dynamic resutl =

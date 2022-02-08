@@ -21,7 +21,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign in to TheLatte"),
+        title: Text("Register--------->"),
         actions: [
           IconButton(
               onPressed: () {
@@ -34,68 +34,106 @@ class _SignInState extends State<SignIn> {
           padding: EdgeInsets.all(10),
           child: Form(
             key: _formkey,
-            child: Column(
-              children: [
-                ElevatedButton(
-                    onPressed: () async {
-                      dynamic result = await _auth.signInAnon();
-                      if (result != null) {
-                        print("sign in");
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ElevatedButton(
+                      onPressed: () async {
+                        dynamic result = await _auth.signInAnon();
+                        if (result != null) {
+                          print("sign in");
 
-                        print(result.uid);
-                      } else {
-                        print("sign failed");
-                        print(result);
-                      }
-                    },
-                    child: Text("Sign in anon")),
-                TextFormField(validator: (value) {
-                  if (value!.isEmpty) {
-                    return ("Enter an email");
-                  } else {
-                    return null;
-                  }
-                }, onChanged: (value) {
-                  setState(() {
-                    email = value;
-                  });
-                }),
-                TextFormField(validator: (value) {
-                  if (value!.isEmpty) {
-                    return ("Enter the password");
-                  } else {
-                    return null;
-                  }
-                }, onChanged: (value) {
-                  setState(() {
-                    pass = value;
-                  });
-                }),
-                TextButton(
-                    onPressed: () {
-                      print(email);
-                      print(pass);
-
-                      if (_formkey.currentState!.validate()) {
-                        dynamic result =
-                            _auth.SignInWithEmailAndPassword(email, pass);
-                        if (result == null) {
-                          setState(() {
-                            error = "Wrong password";
-                          });
+                          print(result.uid);
+                        } else {
+                          print("sign failed");
+                          print(result);
                         }
-                      }
-                    },
-                    child: Text("Sign in")),
-                SizedBox(
-                  height: 20,
-                ),
-                FloatingActionButton.extended(
-                    onPressed: () async {
-                      Navigator.pushNamed(context, '/resetPasword');
-                    },
-                    label: Text("Forget Password")),
-              ],
+                      },
+                      child: Text("Sign in anonymously")),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                      decoration: InputDecoration(
+                        fillColor: Colors.green,
+                        hintText: "enter email",
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                          borderSide: new BorderSide(),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return ("Enter an email");
+                        } else {
+                          return null;
+                        }
+                      },
+                      onChanged: (value) {
+                        setState(() {
+                          email = value;
+                        });
+                      }),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                      decoration: InputDecoration(
+                        fillColor: Colors.green,
+                        hintText: "enter password",
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                          borderSide: new BorderSide(),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return ("Enter the password");
+                        } else {
+                          return null;
+                        }
+                      },
+                      onChanged: (value) {
+                        setState(() {
+                          pass = value;
+                        });
+                      }),
+                  ElevatedButton(
+                      onPressed: () {
+                        print(email);
+                        print(pass);
+
+                        if (_formkey.currentState!.validate()) {
+                          dynamic result =
+                              _auth.SignInWithEmailAndPassword(email, pass);
+                          if (result == null) {
+                            setState(() {
+                              error = "Wrong password";
+                            });
+                          }
+                        }
+                      },
+                      child: Text("Sign in")),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  FloatingActionButton.extended(
+                      heroTag: 'resetbutton',
+                      onPressed: () async {
+                        Navigator.pushNamed(context, '/resetPasword');
+                      },
+                      label: Text("Forget Password")),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  FloatingActionButton.extended(
+                      onPressed: () async {
+                        _auth.signInWithGoogle();
+                      },
+                      icon: Icon(Icons.security),
+                      label: Text("SignIn With Google")),
+                ],
+              ),
             ),
           )),
     );

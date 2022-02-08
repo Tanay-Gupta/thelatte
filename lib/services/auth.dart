@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:thelatte/models/user.dart';
 
 class AuthServices {
@@ -82,5 +83,23 @@ class AuthServices {
     } catch (e) {
       return null;
     }
+  }
+
+//google sign in
+  Future signInWithGoogle() async {
+    GoogleSignInAccount? googleuser = await GoogleSignIn().signIn();
+
+    GoogleSignInAuthentication googleAuth = await googleuser!.authentication;
+
+    OAuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
+
+    await _auth.signInWithCredential(credential);
+  }
+
+  //google signout
+  Future signOutGoogle() async {
+    await GoogleSignIn().signOut();
+    await _auth.signOut();
   }
 }
